@@ -1,0 +1,26 @@
+id: htaccess-config
+
+info:
+  name: HTaccess config file
+  author: Yash Anand @yashanand155
+  severity: info
+  metadata:
+    max-request: 6
+  tags: miscellaneous,misc,config,vuln
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.htaccess"
+      - "{{BaseURL}}/.htaccess.bak"
+      - "{{BaseURL}}/.htaccess.txt"
+      - "{{BaseURL}}/.htaccess.old"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        words:
+          - RewriteRule
+          - </IfModule>
+          - <IfModule
+        condition: and
